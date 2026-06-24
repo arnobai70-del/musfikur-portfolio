@@ -1,20 +1,19 @@
 import { useEffect } from 'react';
-import { onAuthStateChanged } from 'firebase/auth';
+import { onAuthStateChanged, type User } from 'firebase/auth';
 import { auth } from '../firebase/config';
 import { useAuthStore } from '../store/authStore';
 
-export const useAuth = () => {
+export const useAuth = (): void => {
   const { setUser, setLoading, setAdmin } = useAuthStore();
 
   useEffect(() => {
     // ফায়ারবেস অথেন্টিকেশন স্টেট লিসেনার
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, (user: User | null) => {
       if (user) {
         // যদি ইউজার লগইন থাকে
         setUser(user);
         
-        // এখানে আপনি আপনার ইমেইল চেক করে অ্যাডমিন স্ট্যাটাস সেট করতে পারেন
-        // উদাহরণস্বরূপ: আপনার নির্দিষ্ট ইমেইলটি অ্যাডমিন হিসেবে গণ্য হবে
+        // অ্যাডমিন ইমেইল চেক
         if (user.email === 'contact@musfikurrahmanarnob.dev') {
           setAdmin(true);
         } else {
@@ -30,7 +29,7 @@ export const useAuth = () => {
       setLoading(false);
     });
 
-    // ক্লিনআপ ফাংশন: যখন কম্পোনেন্ট আনমাউন্ট হবে তখন লিসেনার বন্ধ করে দিবে
+    // ক্লিনআপ ফাংশন
     return () => unsubscribe();
   }, [setUser, setLoading, setAdmin]);
 };
