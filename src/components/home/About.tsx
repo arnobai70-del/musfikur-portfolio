@@ -1,139 +1,150 @@
 import React from 'react';
-import { User, GraduationCap, Briefcase, Target, Award, Code, CheckCircle2 } from 'lucide-react';
+import { motion, Variants } from 'framer-motion';
+import { 
+  User, 
+  GraduationCap, 
+  Target, 
+  Award, 
+  Briefcase, 
+  Rocket 
+} from 'lucide-react';
 
 const About: React.FC = () => {
+  
+  // Animation Variants
+  const fadeUp: Variants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { 
+      opacity: 1, 
+      y: 0, 
+      transition: { duration: 0.6, ease: "easeOut" } 
+    }
+  };
+
   const stats = [
-    { label: 'Years of Experience', value: '02+', icon: <Briefcase size={24} /> },
-    { label: 'Projects Completed', value: '20+', icon: <Code size={24} /> },
-    { label: 'Certifications Earned', value: '10+', icon: <Award size={24} /> },
+    { label: 'Years Experience', value: '02+', icon: Briefcase, color: 'text-blue-600', bg: 'bg-blue-50' },
+    { label: 'Projects Completed', value: '20+', icon: Rocket, color: 'text-emerald-600', bg: 'bg-emerald-50' },
+    { label: 'Certifications', value: '10+', icon: Award, color: 'text-purple-600', bg: 'bg-purple-50' },
   ];
 
   return (
-    <section id="about" className="py-24 bg-[#F8FAFC] overflow-hidden">
+    <section id="about" className="py-24 bg-white overflow-hidden font-['Inter']">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Section Heading */}
-        <div className="text-center mb-20">
-          <h2 className="text-[#2563EB] text-sm font-[800] uppercase tracking-[0.2em] mb-3">About Me</h2>
-          <h3 className="text-3xl md:text-5xl font-[800] text-[#0F172A] tracking-tight">Professional Journey & Expertise</h3>
-          <div className="w-16 h-1.5 bg-[#2563EB] mx-auto mt-6 rounded-full"></div>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           
-          {/* Left Column: Stats & Profile Summary */}
-          <div className="lg:col-span-5 space-y-6">
-            <div className="relative group">
-              <div className="absolute -inset-2 bg-[#2563EB]/5 rounded-3xl transform rotate-1 group-hover:rotate-0 transition-transform duration-500"></div>
-              <div className="relative bg-white p-8 rounded-2xl border border-[#E2E8F0] shadow-sm">
-                <div className="space-y-6">
-                  <p className="text-[#475569] text-lg leading-relaxed font-[400] italic">
-                    "I am a results-driven professional with a unique blend of engineering precision, a quality assurance mindset, and modern web development skills."
-                  </p>
-                  <div className="flex items-center gap-4 pt-6 border-t border-[#E2E8F0]">
-                    <div className="w-12 h-12 bg-[#0F172A] rounded-xl flex items-center justify-center text-white font-[800]">M</div>
-                    <div>
-                      <h4 className="font-[700] text-[#0F172A]">Musfikur Rahman Arnob</h4>
-                      <p className="text-[11px] text-[#475569] font-[700] uppercase tracking-wider">Engineering & Development</p>
-                    </div>
-                  </div>
+          {/* Left Side: Visual Element & Image Container */}
+          <motion.div 
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="relative"
+          >
+            <div className="relative z-10 rounded-[40px] overflow-hidden border-[12px] border-slate-50 shadow-2xl">
+              <img 
+                src="https://res.cloudinary.com/dkpju3m8n/image/upload/v1782354341/WhatsApp_Image_2026-06-25_at_8.25.13_AM_iwq7gc.jpg" 
+                alt="About Musfikur Rahman Arnob" 
+                className="w-full h-auto object-cover grayscale-[0.2] hover:grayscale-0 transition-all duration-700"
+              />
+            </div>
+            
+            {/* Decorative Elements */}
+            <div className="absolute -bottom-10 -right-10 w-64 h-64 bg-blue-600/5 rounded-full blur-3xl -z-10"></div>
+            <div className="absolute -top-10 -left-10 w-48 h-48 bg-slate-100 rounded-full -z-10"></div>
+          </motion.div>
+
+          {/* Right Side: Content */}
+          <div className="space-y-10">
+            <motion.div 
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="space-y-4"
+            >
+              <h2 className="text-[#2563EB] text-sm font-[800] uppercase tracking-[0.2em] flex items-center gap-2">
+                <User size={16} /> About Me
+              </h2>
+              <h3 className="text-3xl md:text-5xl font-[800] text-[#0F172A] tracking-tight leading-tight">
+                Engineering Excellence with <br /> 
+                <span className="text-[#2563EB]">Digital Innovation</span>
+              </h3>
+              <div className="w-20 h-1.5 bg-[#2563EB] rounded-full"></div>
+            </motion.div>
+
+            <motion.div 
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="space-y-6"
+            >
+              <p className="text-[#475569] text-lg leading-relaxed">
+                Hello! I'm <span className="font-bold text-[#0F172A]">Musfikur Rahman Arnob</span>, a multi-disciplinary professional blending the worlds of 
+                <span className="text-[#2563EB] font-semibold"> Industrial Production Engineering</span>, 
+                <span className="text-[#2563EB] font-semibold"> Software Quality Assurance</span>, and 
+                <span className="text-[#2563EB] font-semibold"> Web Development</span>.
+              </p>
+              
+              <p className="text-[#475569] leading-relaxed">
+                With a solid background in Production Engineering, I have a keen eye for process optimization and system reliability. My transition into SQA and Web Development allowed me to apply engineering principles to digital products, ensuring they are not only functional but also built to the highest quality standards.
+              </p>
+            </motion.div>
+
+            {/* Educational & Goal Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <motion.div 
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                className="p-6 bg-[#F8FAFC] rounded-3xl border border-slate-100 space-y-3 group hover:bg-white hover:shadow-xl hover:border-blue-100 transition-all duration-300"
+              >
+                <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-blue-600 shadow-sm">
+                  <GraduationCap size={24} />
                 </div>
-              </div>
+                <h4 className="font-[800] text-[#0F172A]">Education</h4>
+                <p className="text-sm text-[#475569] leading-relaxed">
+                  B.Sc. in Industrial & Production Engineering (IPE) - focused on process efficiency.
+                </p>
+              </motion.div>
+
+              <motion.div 
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                className="p-6 bg-[#F8FAFC] rounded-3xl border border-slate-100 space-y-3 group hover:bg-white hover:shadow-xl hover:border-blue-100 transition-all duration-300"
+              >
+                <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-blue-600 shadow-sm">
+                  <Target size={24} />
+                </div>
+                <h4 className="font-[800] text-[#0F172A]">Career Goals</h4>
+                <p className="text-sm text-[#475569] leading-relaxed">
+                  To lead engineering teams in developing robust, optimized, and high-quality software systems.
+                </p>
+              </motion.div>
             </div>
 
-            {/* Statistics Cards */}
-            <div className="grid grid-cols-1 gap-4">
+            {/* Statistics Row */}
+            <div className="grid grid-cols-3 gap-4 pt-6 border-t border-slate-100">
               {stats.map((stat, index) => (
-                <div 
-                  key={index} 
-                  className="bg-white p-5 rounded-2xl border border-[#E2E8F0] flex items-center gap-5 hover:border-[#2563EB]/30 transition-all duration-300 group shadow-sm hover:shadow-md"
+                <motion.div 
+                  key={index}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  className="text-center md:text-left"
                 >
-                  <div className="p-3 bg-[#F8FAFC] text-[#2563EB] rounded-xl group-hover:bg-[#2563EB] group-hover:text-white transition-all duration-300">
-                    {stat.icon}
-                  </div>
-                  <div>
-                    <div className="text-2xl font-[800] text-[#0F172A]">{stat.value}</div>
-                    <div className="text-sm text-[#475569] font-[500]">{stat.label}</div>
-                  </div>
-                </div>
+                  <h5 className="text-2xl md:text-3xl font-[800] text-[#0F172A]">{stat.value}</h5>
+                  <p className="text-[10px] md:text-xs font-bold text-[#475569] uppercase tracking-wider">{stat.label}</p>
+                </motion.div>
               ))}
             </div>
           </div>
 
-          {/* Right Column: Detailed Introduction & Background */}
-          <div className="lg:col-span-7 space-y-12">
-            
-            {/* Introduction */}
-            <div className="space-y-6">
-              <div className="flex items-center gap-3 text-[#0F172A]">
-                <div className="w-10 h-10 bg-[#2563EB]/10 rounded-full flex items-center justify-center text-[#2563EB]">
-                  <User size={22} />
-                </div>
-                <h4 className="font-[800] text-xl">Who I Am</h4>
-              </div>
-              <p className="text-[#475569] text-lg leading-relaxed font-[400]">
-                As a <span className="font-[700] text-[#0F172A]">Production Engineer</span> and <span className="font-[700] text-[#0F172A]">SQA Engineer</span>, I have a deep passion for optimizing systems. My transition into <span className="font-[700] text-[#2563EB]">Web Development</span> allows me to bridge the gap between industrial efficiency and digital innovation. I thrive on solving complex problems and delivering high-quality, scalable solutions.
-              </p>
-            </div>
-
-            {/* Education & Goals Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-              
-              {/* Education */}
-              <div className="space-y-5">
-                <div className="flex items-center gap-3 text-[#0F172A]">
-                  <GraduationCap className="text-[#2563EB]" size={22} />
-                  <h4 className="font-[800] text-lg">Education</h4>
-                </div>
-                <div className="pl-6 border-l-2 border-[#E2E8F0] space-y-4">
-                  <div className="relative">
-                    <div className="absolute -left-[26px] top-1 w-2 h-2 bg-[#2563EB] rounded-full"></div>
-                    <h5 className="font-[700] text-[#0F172A] text-sm uppercase tracking-wide">B.Sc. in Engineering</h5>
-                    <p className="text-[#475569] text-sm mt-1">Industrial and Production Engineering (IPE)</p>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <CheckCircle2 size={16} className="text-[#2563EB] mt-0.5 shrink-0" />
-                    <p className="text-sm text-[#475569] font-[400]">Strong foundation in process optimization and quality control systems.</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Career Goals */}
-              <div className="space-y-5">
-                <div className="flex items-center gap-3 text-[#0F172A]">
-                  <Target className="text-[#2563EB]" size={22} />
-                  <h4 className="font-[800] text-lg">Career Goals</h4>
-                </div>
-                <div className="pl-6 border-l-2 border-[#E2E8F0] space-y-4">
-                  <div className="flex items-start gap-3">
-                    <CheckCircle2 size={16} className="text-[#2563EB] mt-0.5 shrink-0" />
-                    <p className="text-sm text-[#475569] font-[400]">To lead digital transformation in modern production environments.</p>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <CheckCircle2 size={16} className="text-[#2563EB] mt-0.5 shrink-0" />
-                    <p className="text-sm text-[#475569] font-[400]">To build high-performance software with zero-defect quality assurance.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Professional Journey Highlights */}
-            <div className="bg-[#0F172A] p-10 rounded-[32px] text-white relative overflow-hidden group shadow-xl">
-              {/* Decorative Icon */}
-              <Briefcase size={140} className="absolute -right-10 -bottom-10 text-white/5 rotate-12 transition-transform duration-700 group-hover:scale-110" />
-              
-              <div className="relative z-10 space-y-5">
-                <h4 className="text-xl font-[800] flex items-center gap-3">
-                  <div className="w-8 h-px bg-[#2563EB]"></div>
-                  Professional Journey
-                </h4>
-                <p className="text-slate-300 leading-relaxed font-[400]">
-                  My career started in the industrial sector, focusing on production planning and engineering. Recognizing the power of technology, I expanded my expertise into Software Quality Assurance (SQA) and Full-Stack Development. This multi-disciplinary approach allows me to view projects from both a technical and operational perspective, ensuring every solution is both efficient and robust.
-                </p>
-              </div>
-            </div>
-
-          </div>
         </div>
       </div>
     </section>
