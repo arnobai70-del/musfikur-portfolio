@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { collection, getDocs, query, orderBy, limit, getCountFromServer } from 'firebase/firestore';
+import { collection, getDocs, query, orderBy, limit, getCountFromServer, Timestamp } from 'firebase/firestore';
 import { db } from '../../firebase/config';
 import { Link } from 'react-router-dom';
 import { 
@@ -26,7 +26,7 @@ interface RecentMessage {
   id: string;
   fullName: string;
   subject: string;
-  createdAt: any;
+  createdAt: Timestamp | null;
 }
 
 const Dashboard = () => {
