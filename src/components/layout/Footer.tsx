@@ -20,10 +20,10 @@ const Footer: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
           
-          {/* Left: Branding & Contact Email */}
+          {/* Left: Branding & Contact Email - Updated to MRArnob */}
           <div className="space-y-6">
             <NavLink to="/" className="text-xl font-extrabold text-[#0F172A] tracking-tighter">
-              MusfikurRahmanArnob<span className="text-[#2563EB]">.dev</span>
+              MRArnob<span className="text-[#2563EB]">.dev</span>
             </NavLink>
             <p className="text-[#475569] text-sm max-w-xs">
               Building reliable systems, optimizing processes, and creating modern digital experiences through engineering and development.

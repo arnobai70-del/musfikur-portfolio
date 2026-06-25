@@ -61,14 +61,14 @@ const Navbar: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
           
-          {/* Logo */}
+          {/* Logo - Updated to MRArnob */}
           <div className="flex-shrink-0">
             <NavLink 
               to="/" 
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               className="text-xl md:text-2xl font-[800] text-[#0F172A] tracking-tighter flex items-center"
             >
-              MusfikurRahmanArnob<span className="text-[#2563EB]">.dev</span>
+              MRArnob<span className="text-[#2563EB]">.dev</span>
             </NavLink>
           </div>
 
