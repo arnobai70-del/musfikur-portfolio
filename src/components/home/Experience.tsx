@@ -1,5 +1,6 @@
 import React from 'react';
 import { Briefcase, Calendar, CheckCircle2, Building2, ExternalLink } from 'lucide-react';
+import { motion, Variants } from 'framer-motion';
 
 interface ExperienceItem {
   role: string;
@@ -36,22 +37,50 @@ const Experience: React.FC = () => {
     },
   ];
 
+  // Animation Variants (TypeScript এরর ফিক্স করা হয়েছে)
+  const fadeUpVariant: Variants = {
+    hidden: { opacity: 0, y: 40 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+  };
+
+  const lineVariant: Variants = {
+    hidden: { height: 0 },
+    visible: { height: '100%', transition: { duration: 1.5, ease: "easeInOut" } }
+  };
+
+  const dotVariant: Variants = {
+    hidden: { scale: 0, opacity: 0 },
+    visible: { scale: 1, opacity: 1, transition: { duration: 0.5, type: "spring", stiffness: 200 } }
+  };
+
   return (
     <section id="experience" className="py-24 bg-[#F8FAFC] overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Heading */}
-        <div className="text-center mb-24">
+        <motion.div 
+          variants={fadeUpVariant}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="text-center mb-24"
+        >
           <h2 className="text-[#2563EB] text-sm font-[800] uppercase tracking-[0.2em] mb-3">Resume</h2>
           <h3 className="text-3xl md:text-5xl font-[800] text-[#0F172A] tracking-tight">Professional Experience</h3>
           <div className="w-16 h-1.5 bg-[#2563EB] mx-auto mt-6 rounded-full"></div>
-        </div>
+        </motion.div>
 
         {/* Timeline Layout */}
         <div className="relative max-w-5xl mx-auto">
           
-          {/* Main Vertical Line */}
-          <div className="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 top-0 bottom-0 w-px bg-[#E2E8F0]"></div>
+          {/* Main Vertical Line Animated */}
+          <motion.div 
+            variants={lineVariant}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 top-0 w-px bg-[#E2E8F0]"
+          ></motion.div>
 
           <div className="space-y-16">
             {experiences.map((exp, index) => (
@@ -62,8 +91,15 @@ const Experience: React.FC = () => {
                 }`}
               >
                 
-                {/* Timeline Dot/Icon Center */}
-                <div className="absolute left-4 md:left-1/2 transform -translate-x-1/2 flex items-center justify-center z-10">
+                {/* Timeline Dot/Icon Center Animated */}
+                <motion.div 
+                  variants={dotVariant}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, margin: "-100px" }}
+                  transition={{ delay: index * 0.2 }}
+                  className="absolute left-4 md:left-1/2 transform -translate-x-1/2 flex items-center justify-center z-10"
+                >
                   <div className={`w-10 h-10 rounded-xl border-4 border-[#F8FAFC] flex items-center justify-center transition-all duration-300 ${
                     exp.isCurrent 
                       ? 'bg-[#2563EB] text-white shadow-lg shadow-blue-200' 
@@ -71,10 +107,16 @@ const Experience: React.FC = () => {
                   }`}>
                     <Briefcase size={18} />
                   </div>
-                </div>
+                </motion.div>
 
-                {/* Content Card */}
-                <div className="w-full md:w-[45%] ml-10 md:ml-0">
+                {/* Content Card Animated */}
+                <motion.div 
+                  initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  transition={{ duration: 0.6, delay: index * 0.2, ease: "easeOut" }}
+                  className="w-full md:w-[45%] ml-10 md:ml-0"
+                >
                   <div className="bg-white p-8 rounded-[32px] border border-[#E2E8F0] shadow-sm hover:shadow-xl hover:border-[#2563EB]/30 transition-all duration-500 group relative">
                     
                     {/* Active Status Indicator */}
@@ -124,7 +166,7 @@ const Experience: React.FC = () => {
                       </ul>
                     </div>
                   </div>
-                </div>
+                </motion.div>
 
                 {/* Empty Spacer for Desktop Symmetry */}
                 <div className="hidden md:block w-[45%]"></div>
@@ -133,8 +175,14 @@ const Experience: React.FC = () => {
           </div>
         </div>
 
-        {/* Action Button */}
-        <div className="mt-24 text-center">
+        {/* Action Button Animated */}
+        <motion.div 
+          variants={fadeUpVariant}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="mt-24 text-center"
+        >
             <div className="inline-block p-1 rounded-2xl bg-white border border-[#E2E8F0] shadow-sm">
               <button className="flex items-center gap-3 bg-[#0F172A] text-white px-10 py-4 rounded-xl font-[700] hover:bg-[#2563EB] transition-all duration-300 shadow-xl shadow-blue-900/10 active:scale-95">
                 <ExternalLink size={18} />
@@ -144,7 +192,7 @@ const Experience: React.FC = () => {
             <p className="mt-6 text-[#475569] text-sm font-[500]">
               Interested in a deeper look? Download my PDF resume above.
             </p>
-        </div>
+        </motion.div>
 
       </div>
     </section>
