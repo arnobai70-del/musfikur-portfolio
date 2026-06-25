@@ -1,170 +1,192 @@
 import React from 'react';
-import { Helmet } from 'react-helmet-async';
-import { FileText, ArrowRight, Code, ShieldCheck, Settings } from 'lucide-react';
+import { motion, Variants } from 'framer-motion';
+import { ArrowRight, Settings, ShieldCheck, Code, CheckCircle2 } from 'lucide-react';
 
 const Hero: React.FC = () => {
-  const handleContactClick = () => {
-    const contactSection = document.getElementById('contact');
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth' });
+  // Function to scroll to contact section
+  const scrollToContact = () => {
+    const element = document.getElementById('contact');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  // Animation Variants with explicit TypeScript types
+  const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { 
+        staggerChildren: 0.2, 
+        delayChildren: 0.3 
+      }
+    }
+  };
+
+  const itemVariants: Variants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { 
+      opacity: 1, 
+      y: 0, 
+      transition: { 
+        duration: 0.5, 
+        ease: "easeOut" 
+      } 
     }
   };
 
   return (
-    <>
-      {/* SEO Optimization */}
-      <Helmet>
-        <title>Musfikur Rahman Arnob | Production & SQA Engineer, Web Developer</title>
-        <meta 
-          name="description" 
-          content="Portfolio of Musfikur Rahman Arnob - A professional Production Engineer, SQA Engineer, and Web Developer specializing in reliable systems and modern digital experiences." 
-        />
-        <meta name="keywords" content="Musfikur Rahman Arnob, Production Engineer, SQA Engineer, Web Developer, Software Quality Assurance, Portfolio" />
-      </Helmet>
+    <section id="home" className="relative min-h-screen flex items-center pt-20 pb-16 bg-white overflow-hidden">
+      {/* Background Subtle Gradient Decor */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10">
+        <div className="absolute top-[-10%] left-[-5%] w-[40%] h-[40%] bg-blue-50 rounded-full blur-[120px] opacity-60"></div>
+        <div className="absolute bottom-[-10%] right-[-5%] w-[30%] h-[30%] bg-slate-50 rounded-full blur-[100px] opacity-60"></div>
+      </div>
 
-      <section className="relative min-h-screen flex items-center pt-20 overflow-hidden bg-[#FFFFFF]">
-        {/* Background Decorative Elements */}
-        <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/4 w-[500px] h-[500px] bg-[#2563EB]/5 rounded-full blur-[120px]"></div>
-        <div className="absolute bottom-0 left-0 translate-y-1/4 -translate-x-1/4 w-[400px] h-[400px] bg-[#0F172A]/5 rounded-full blur-[100px]"></div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          
+          {/* Left Content Column */}
+          <motion.div 
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="space-y-8"
+          >
+            {/* Availability Badge */}
+            <motion.div variants={itemVariants} className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 rounded-full">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-600 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-600"></span>
+              </span>
+              <span className="text-blue-700 text-xs font-extrabold uppercase tracking-widest">
+                Available for opportunities
+              </span>
+            </motion.div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-16">
-            
-            {/* Left Content - Typography & CTA */}
-            <div className="flex-1 text-center lg:text-left space-y-8 animate-fade-in-up">
-              <div className="space-y-4">
-                <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-[#2563EB]/10 text-[#2563EB] text-sm font-bold tracking-wide uppercase">
-                  Available for Opportunities
+            {/* Main Headline */}
+            <motion.div variants={itemVariants} className="space-y-2">
+              <h1 className="text-5xl md:text-7xl font-[800] text-[#0F172A] tracking-tighter leading-[1.1]">
+                Musfikur <br /> Rahman <br />
+                <span className="text-[#2563EB]">Arnob</span>
+              </h1>
+            </motion.div>
+
+            {/* Professional Titles with Icons */}
+            <motion.div variants={itemVariants} className="space-y-4">
+              <div className="flex flex-wrap items-center gap-6">
+                <div className="flex items-center gap-2 text-[#475569] font-semibold">
+                  <Settings size={18} className="text-[#2563EB]" />
+                  <span>Production Engineer</span>
                 </div>
-                
-                <h1 className="text-4xl md:text-6xl lg:text-7xl font-[800] text-[#0F172A] leading-[1.1] tracking-tight">
-                  Musfikur Rahman <br />
-                  <span className="text-[#2563EB]">Arnob</span>
-                </h1>
-
-                <div className="flex flex-wrap justify-center lg:justify-start gap-4 text-[#475569] font-[500] text-lg md:text-xl">
-                  <span className="flex items-center gap-2">
-                    <Settings size={18} className="text-[#2563EB]" /> Production Engineer
-                  </span>
-                  <span className="hidden md:block text-[#E2E8F0]">|</span>
-                  <span className="flex items-center gap-2">
-                    <ShieldCheck size={18} className="text-[#2563EB]" /> SQA Engineer
-                  </span>
-                  <span className="hidden md:block text-[#E2E8F0]">|</span>
-                  <span className="flex items-center gap-2">
-                    <Code size={18} className="text-[#2563EB]" /> Web Developer
-                  </span>
-                </div>
-              </div>
-
-              <p className="max-w-2xl mx-auto lg:mx-0 text-[#475569] text-base md:text-lg leading-relaxed font-[400]">
-                I build reliable systems, optimize processes, and create modern digital experiences through engineering, quality assurance, and web development.
-              </p>
-
-              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-                <button 
-                  onClick={handleContactClick}
-                  className="group w-full sm:w-auto bg-[#0F172A] text-white px-8 py-4 rounded-xl font-[700] flex items-center justify-center gap-2 hover:bg-[#2563EB] transition-all duration-300 shadow-xl shadow-blue-900/10"
-                >
-                  Hire Me
-                  <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-                </button>
-                
-                <button 
-                  className="w-full sm:w-auto border-2 border-[#E2E8F0] text-[#0F172A] px-8 py-4 rounded-xl font-[700] flex items-center justify-center gap-2 hover:bg-[#F8FAFC] hover:border-[#2563EB] transition-all duration-300"
-                >
-                  <FileText size={20} />
-                  Download CV
-                </button>
-              </div>
-
-              {/* Stats Section */}
-              <div className="pt-10 flex items-center justify-center lg:justify-start gap-10">
-                <div>
-                  <div className="text-3xl font-[800] text-[#0F172A]">02+</div>
-                  <div className="text-[11px] uppercase tracking-widest text-[#475569] font-[700] mt-1">Years Exp.</div>
-                </div>
-                <div className="w-px h-12 bg-[#E2E8F0]"></div>
-                <div>
-                  <div className="text-3xl font-[800] text-[#0F172A]">20+</div>
-                  <div className="text-[11px] uppercase tracking-widest text-[#475569] font-[700] mt-1">Projects</div>
-                </div>
-                <div className="w-px h-12 bg-[#E2E8F0]"></div>
-                <div>
-                  <div className="text-3xl font-[800] text-[#0F172A]">10+</div>
-                  <div className="text-[11px] uppercase tracking-widest text-[#475569] font-[700] mt-1">Certifications</div>
+                <div className="flex items-center gap-2 text-[#475569] font-semibold">
+                  <ShieldCheck size={18} className="text-[#2563EB]" />
+                  <span>SQA Engineer</span>
                 </div>
               </div>
+              <div className="flex items-center gap-2 text-[#475569] font-semibold">
+                <Code size={18} className="text-[#2563EB]" />
+                <span>Web Developer</span>
+              </div>
+            </motion.div>
+
+            {/* Tagline Paragraph */}
+            <motion.p variants={itemVariants} className="text-[#475569] text-lg leading-relaxed max-w-lg">
+              I build reliable systems, optimize processes, and create modern digital experiences through engineering, quality assurance, and web development.
+            </motion.p>
+
+            {/* Single CTA Button - Hire Me */}
+            <motion.div variants={itemVariants} className="pt-4">
+              <button 
+                onClick={scrollToContact}
+                className="bg-[#0F172A] text-white px-10 py-5 rounded-2xl font-[800] text-sm hover:bg-[#2563EB] transition-all duration-300 shadow-2xl shadow-blue-900/20 flex items-center gap-3 group active:scale-95"
+              >
+                Hire Me
+                <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+              </button>
+            </motion.div>
+
+            {/* Quick Stats Section */}
+            <motion.div variants={itemVariants} className="pt-10 flex flex-wrap items-center gap-12 border-t border-slate-100">
+              <div className="space-y-1">
+                <h3 className="text-3xl font-[800] text-[#0F172A]">02+</h3>
+                <p className="text-[10px] font-bold text-[#475569] uppercase tracking-widest">Years Exp.</p>
+              </div>
+              <div className="space-y-1">
+                <h3 className="text-3xl font-[800] text-[#0F172A]">20+</h3>
+                <p className="text-[10px] font-bold text-[#475569] uppercase tracking-widest">Projects</p>
+              </div>
+              <div className="space-y-1">
+                <h3 className="text-3xl font-[800] text-[#0F172A]">10+</h3>
+                <p className="text-[10px] font-bold text-[#475569] uppercase tracking-widest">Certifications</p>
+              </div>
+            </motion.div>
+          </motion.div>
+
+          {/* Right Visual Column (Image Area) */}
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="relative flex justify-center lg:justify-end"
+          >
+            {/* Animated Decorative Shapes */}
+            <div className="absolute inset-0 flex items-center justify-center -z-10">
+              <div className="w-[80%] h-[80%] border border-blue-100 rounded-[60px] rotate-6 animate-pulse"></div>
+              <div className="w-[85%] h-[85%] border border-slate-100 rounded-[60px] -rotate-3"></div>
             </div>
 
-            {/* Right Side - Profile Image with Corporate Accents */}
-            <div className="flex-1 relative group">
-              <div className="relative w-72 h-72 md:w-96 md:h-96 lg:w-[480px] lg:h-[480px] mx-auto">
-                
-                {/* Modern Geometric Accents */}
-                <div className="absolute -inset-4 border-2 border-[#2563EB]/20 rounded-[40px] rotate-3 group-hover:rotate-0 transition-transform duration-700"></div>
-                <div className="absolute -inset-4 border-2 border-[#0F172A]/10 rounded-[40px] -rotate-3 group-hover:rotate-0 transition-transform duration-700"></div>
-
-                {/* Main Image Container */}
-                <div className="absolute inset-0 bg-[#F8FAFC] rounded-[32px] overflow-hidden border border-[#E2E8F0] shadow-2xl z-10">
-                  <img 
-                    src="https://via.placeholder.com/800x800?text=Musfikur+Arnob" 
-                    alt="Musfikur Rahman Arnob" 
-                    className="w-full h-full object-cover grayscale-[20%] hover:grayscale-0 transition-all duration-700 scale-105 hover:scale-100"
-                  />
+            {/* Profile Image Container */}
+            <div className="relative w-full max-w-[400px] aspect-[4/5] bg-[#F8FAFC] rounded-[60px] border border-slate-100 shadow-inner overflow-hidden group">
+              <img 
+                src="https://res.cloudinary.com/demo/image/upload/v1652345767/docs/demo_image2.jpg" 
+                alt="Musfikur Rahman Arnob" 
+                className="w-full h-full object-cover filter saturate-[0.8] group-hover:saturate-[1.1] transition-all duration-700"
+              />
+              
+              {/* Floating Badge 1: Production Eng. */}
+              <motion.div 
+                initial={{ x: 20, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ delay: 1, duration: 0.5 }}
+                className="absolute top-20 -right-4 md:-right-8 bg-white/90 backdrop-blur-md p-4 rounded-2xl shadow-xl border border-white flex items-center gap-3"
+              >
+                <div className="w-10 h-10 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center">
+                  <Settings size={20} />
                 </div>
-
-                {/* Floating Badge 1 - SQA */}
-                <div className="absolute -bottom-4 -left-8 bg-white p-4 rounded-2xl shadow-2xl border border-[#E2E8F0] z-20 animate-bounce-subtle">
-                  <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 bg-[#2563EB]/10 rounded-xl flex items-center justify-center text-[#2563EB]">
-                      <ShieldCheck size={24} />
-                    </div>
-                    <div>
-                      <div className="text-[10px] text-[#475569] uppercase font-bold tracking-tighter">Specialist</div>
-                      <div className="text-sm font-[800] text-[#0F172A]">SQA Engineer</div>
-                    </div>
-                  </div>
+                <div>
+                  <p className="text-[10px] font-bold text-slate-400 uppercase leading-none mb-1">Process</p>
+                  <p className="text-sm font-extrabold text-slate-900 leading-none">Production Eng.</p>
                 </div>
+              </motion.div>
 
-                {/* Floating Badge 2 - Engineering */}
-                <div className="absolute top-10 -right-10 bg-white p-4 rounded-2xl shadow-2xl border border-[#E2E8F0] z-20 animate-pulse-subtle">
-                  <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 bg-[#0F172A]/5 rounded-xl flex items-center justify-center text-[#0F172A]">
-                      <Settings size={24} />
-                    </div>
-                    <div>
-                      <div className="text-[10px] text-[#475569] uppercase font-bold tracking-tighter">Process</div>
-                      <div className="text-sm font-[800] text-[#0F172A]">Production Eng.</div>
-                    </div>
-                  </div>
+              {/* Floating Badge 2: SQA Engineer */}
+              <motion.div 
+                initial={{ x: -20, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ delay: 1.2, duration: 0.5 }}
+                className="absolute bottom-16 -left-4 md:-left-8 bg-white/90 backdrop-blur-md p-4 rounded-2xl shadow-xl border border-white flex items-center gap-3"
+              >
+                <div className="w-10 h-10 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center">
+                  <ShieldCheck size={20} />
                 </div>
-              </div>
+                <div>
+                  <p className="text-[10px] font-bold text-slate-400 uppercase leading-none mb-1">Specialist</p>
+                  <p className="text-sm font-extrabold text-slate-900 leading-none">SQA Engineer</p>
+                </div>
+              </motion.div>
             </div>
 
-          </div>
+            {/* Verification/Trust Indicator */}
+            <div className="absolute -bottom-6 right-10 bg-white px-6 py-3 rounded-full shadow-lg border border-slate-50 flex items-center gap-2">
+              <CheckCircle2 size={16} className="text-[#2563EB]" />
+              <span className="text-xs font-bold text-slate-700 uppercase tracking-wider">Top Rated Talent</span>
+            </div>
+          </motion.div>
+
         </div>
-      </section>
-
-      {/* Adding custom animations to your global CSS or Tailwind via style tag for this component */}
-      <style>{`
-        @keyframes fade-in-up {
-          from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes bounce-subtle {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-10px); }
-        }
-        @keyframes pulse-subtle {
-          0%, 100% { opacity: 1; transform: scale(1); }
-          50% { opacity: 0.95; transform: scale(0.98); }
-        }
-        .animate-fade-in-up { animation: fade-in-up 1s ease-out forwards; }
-        .animate-bounce-subtle { animation: bounce-subtle 4s ease-in-out infinite; }
-        .animate-pulse-subtle { animation: pulse-subtle 3s ease-in-out infinite; }
-      `}</style>
-    </>
+      </div>
+    </section>
   );
 };
 
