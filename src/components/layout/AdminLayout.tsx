@@ -11,16 +11,17 @@ import {
   ChevronRight
 } from 'lucide-react';
 import { signOut } from 'firebase/auth';
-import { auth } from '../../firebase/config'; // পাথ ঠিক করা হয়েছে
-import { useAuthStore } from '../../store/authStore'; // পাথ ঠিক করা হয়েছে
+import { auth } from '../../firebase/config';
+import { useAuthStore } from '../../store/authStore';
 import toast from 'react-hot-toast';
 
-// Admin Pages Import - পাথ ঠিক করা হয়েছে
+// Admin Pages Import
 import Dashboard from '../../pages/admin/Dashboard';
 import ProjectsManagement from '../../pages/admin/ProjectsManagement';
 import CertificationsManagement from '../../pages/admin/Certifications';
 import TestimonialsManagement from '../../pages/admin/Testimonials';
 import Messages from '../../pages/admin/Messages';
+import LegalPagesManagement from '../../pages/admin/LegalPagesManagement';
 
 const AdminLayout = () => {
   const navigate = useNavigate();
@@ -37,13 +38,14 @@ const AdminLayout = () => {
     }
   };
 
+  // 💡 এখানে পাথগুলো আপডেট করে '/admin/...' করে দেওয়া হয়েছে
   const navItems = [
-    { name: 'Dashboard', path: '', icon: LayoutDashboard },
-    { name: 'Manage Projects', path: 'projects', icon: Briefcase },
-    { name: 'Certifications', path: 'certifications', icon: Award },
-    { name: 'Testimonials', path: 'testimonials', icon: Users },
-    { name: 'Messages', path: 'messages', icon: MessageSquare },
-    { name: 'Legal Pages', path: 'legal', icon: FileText },
+    { name: 'Dashboard', path: '/admin', icon: LayoutDashboard },
+    { name: 'Manage Projects', path: '/admin/projects', icon: Briefcase },
+    { name: 'Certifications', path: '/admin/certifications', icon: Award },
+    { name: 'Testimonials', path: '/admin/testimonials', icon: Users },
+    { name: 'Messages', path: '/admin/messages', icon: MessageSquare },
+    { name: 'Legal Pages', path: '/admin/legal', icon: FileText },
   ];
 
   return (
@@ -64,7 +66,7 @@ const AdminLayout = () => {
             <NavLink
               key={item.name}
               to={item.path}
-              end={item.path === ''}
+              end={item.path === '/admin'} // 💡 এখানে কন্ডিশন আপডেট করা হয়েছে
               className={({ isActive }) =>
                 `flex items-center justify-between px-4 py-3 rounded-xl transition-all duration-300 group ${
                   isActive 
@@ -126,7 +128,7 @@ const AdminLayout = () => {
             <Route path="certifications" element={<CertificationsManagement />} />
             <Route path="testimonials" element={<TestimonialsManagement />} />
             <Route path="messages" element={<Messages />} />
-            <Route path="legal" element={<div className="p-10 bg-white rounded-3xl border border-slate-200 text-slate-500 text-center">Legal Pages Management coming soon...</div>} />
+            <Route path="legal" element={<LegalPagesManagement />} />
           </Routes>
         </div>
       </main>
