@@ -36,7 +36,7 @@ const Hero: React.FC = () => {
   };
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center pt-20 pb-16 bg-white overflow-hidden">
+    <section id="home" className="relative min-h-screen flex items-center pt-20 pb-16 bg-white overflow-hidden font-['Inter']">
       {/* Background Subtle Gradient Decor */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10">
         <div className="absolute top-[-10%] left-[-5%] w-[40%] h-[40%] bg-blue-50 rounded-full blur-[120px] opacity-60"></div>
@@ -136,12 +136,12 @@ const Hero: React.FC = () => {
               <div className="w-[85%] h-[85%] border border-slate-100 rounded-[60px] -rotate-3"></div>
             </div>
 
-            {/* Profile Image Container */}
+            {/* Profile Image Container - Using your Cloudinary Link */}
             <div className="relative w-full max-w-[400px] aspect-[4/5] bg-[#F8FAFC] rounded-[60px] border border-slate-100 shadow-inner overflow-hidden group">
               <img 
-                src="https://res.cloudinary.com/demo/image/upload/v1652345767/docs/demo_image2.jpg" 
+                src="https://res.cloudinary.com/dkpju3m8n/image/upload/v1782354341/WhatsApp_Image_2026-06-25_at_8.25.13_AM_iwq7gc.jpg" 
                 alt="Musfikur Rahman Arnob" 
-                className="w-full h-full object-cover filter saturate-[0.8] group-hover:saturate-[1.1] transition-all duration-700"
+                className="w-full h-full object-cover filter saturate-[1.1] transition-all duration-700 group-hover:scale-105"
               />
               
               {/* Floating Badge 1: Production Eng. */}
